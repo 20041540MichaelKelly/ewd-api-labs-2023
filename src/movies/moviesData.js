@@ -185,8 +185,7 @@ export const movieDetails = {
     "vote_count": 2257
 };
 
-export const genres = {
-
+export const genres ={
     "genres": [
         {
             "id": 28,
@@ -265,5 +264,9 @@ export const genres = {
             "name": "Western"
         }
     ]
-}
+    };
+
+    
+
+
 
