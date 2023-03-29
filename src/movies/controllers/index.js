@@ -10,6 +10,13 @@ export default (dependencies) => {
         //output
         response.status(200).json(movie);
     };
+
+    const getUpcomingMovies = async (request, response, next) => {
+        // Treatment
+        const movie = await moviesService.getUpcomingMovies(movieId, dependencies);
+        //output
+        response.status(200).json(movie);
+    };
     const find = async (request, response, next) => {
         //input
         const query = request.query;
@@ -21,6 +28,7 @@ export default (dependencies) => {
 
     return {
         getMovie,
-        find
+        find,
+        getUpcomingMovies
     };
 };

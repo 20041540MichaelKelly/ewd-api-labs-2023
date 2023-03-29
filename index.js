@@ -16,6 +16,8 @@ app.use(express.json());
 
 app.use('/api/movies', createMoviesRouter(dependencies));
 
+app.use('/api/movies/upcoming', createMoviesRouter(dependencies));
+
 app.use('/api/', createMoviesRouter(dependencies));
 
 app.use('/api/accounts', createAccountsRouter(dependencies));

@@ -8,7 +8,7 @@ export default (dependencies) => {
         // Treatment
         const account = await accountService.registerAccount(firstName, lastName, email, password, dependencies);
         //output
-        response.status(201).json(account)
+        response.status(201).json(account);
     };
     const getAccount = async (request, response, next) => {
         //input
@@ -17,6 +17,16 @@ export default (dependencies) => {
         const account = await accountService.getAccount(accountId, dependencies);
         //output
         response.status(200).json(account);
+    };
+    const updateAccount = async (request, response, next) => {
+        // Input
+        const id = request.params.id;
+        
+        const { firstName, lastName, email, password } = request.body;
+        // Treatment
+        const account = await accountService.updateAccount(id, firstName, lastName, email, password, dependencies);
+        //output
+        response.status(201).json(account);
     };
     const listAccounts = async (request, response, next) => {
         // Treatment
@@ -29,6 +39,7 @@ export default (dependencies) => {
     return {
         createAccount,
         getAccount,
+        updateAccount,
         listAccounts
     };
 };
