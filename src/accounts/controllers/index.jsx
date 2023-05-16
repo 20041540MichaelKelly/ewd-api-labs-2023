@@ -62,17 +62,35 @@ export default (dependencies) => {
             next(new Error(`Invalid Data ${err.message}`));
         }
     };
+    //... code as before
+    const verify = async (request, response, next) => {
+        try { 
+        // Input
+        const authHeader = request.headers.authorization;
 
+        // Treatment
 
+        const accessToken = authHeader.split(" ")[1];
+        const user = await accountService.verifyToken(accessToken, dependencies);
 
+        //output
+        next();
+    }catch(err){
+        //Token Verification Failed
+        next(new Error(`Verification Failed ${err.message}`));
+        }
+    };
 
     return {
         createAccount,
         getAccount,
-        updateAccount,
         listAccounts,
+        updateAccount,
         authenticateAccount,
         addFavourite,
-        getFavourites
+        getFavourites,
+       // removeFavourite,
+        verify  //ADD THIS
     };
+
 };
