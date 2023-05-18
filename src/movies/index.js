@@ -7,10 +7,6 @@ router.get('/', (req, res) => {
     res.json(movies);
 });
 
-router.get('/genres', (req, res) => {
-    res.json(genres);
-});
-
 // Get movie details
 router.get('/:id', (req, res) => {
     const id = parseInt(req.params.id);

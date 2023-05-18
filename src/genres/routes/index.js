@@ -8,11 +8,11 @@ const createRouter = (dependencies) => {
     router.route('/')
         .post(genresController.createGenre);
 
-        router.route('/')
+        router.route('/movie/list')
         .get(genresController.listGenres);
 
-    // router.route('/:id')
-    //     .get(genresController.getGenre);
+    router.route('/:id')
+        .get(genresController.getGenre);
 
     return router;
 };

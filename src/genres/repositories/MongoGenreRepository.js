@@ -31,11 +31,11 @@ export default class extends GenresRepository {
     //     return this.model.findOneAndDelete(genreId);
     // }
 
-    // async get(genreId) {
-    //     const result = await this.model.findById(genreId);
-    //     const {id, name} = result;
-    //     return new Genres(id, name);
-    // }
+    async get(genreId) {
+        const result = await this.model.findById(genreId);
+        const {id, name} = result;
+        return new Genres(id, name);
+    }
 
 
     async find() {

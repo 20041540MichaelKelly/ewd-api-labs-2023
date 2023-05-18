@@ -11,10 +11,6 @@ import GenresSchema from '../genres/validators';
 import GenresValidators from '../genres/controllers/ValidationController';
 
 
-
-
-
-
 const buildDependencies = () => {
   const dependencies = {
     validators: AccountValidators,
