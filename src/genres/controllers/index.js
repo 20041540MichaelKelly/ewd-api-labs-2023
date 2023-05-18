@@ -19,14 +19,13 @@ export default (dependencies) => {
         //output
         response.status(200).json(genre);
     };
-    
+
     const listGenres = async (request, response, next) => {
         // Treatment
         const genres = await genreService.find(dependencies);
         //output
         response.status(200).json(genres);
     };
-
 
     return {
        createGenre,
