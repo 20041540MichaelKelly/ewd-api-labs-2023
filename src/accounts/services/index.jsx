@@ -58,8 +58,8 @@ export default {
 /**
  * People
  */
-getFavouritePerson: async (personId, { accountsRepository }) => {
-  const account = await accountsRepository.get(personId);
+getFavouritePerson: async (accountId, { accountsRepository }) => {
+  const account = await accountsRepository.get(accountId);
   return account.favouritePeople;
 },
 addFavouritePerson: async (accountId, personId, { accountsRepository }) => {
@@ -72,4 +72,23 @@ addFavouritePerson: async (accountId, personId, { accountsRepository }) => {
   }
   return await accountsRepository.merge(account);
 },
+
+/**
+ * Tv Show
+ */
+getFavouriteTvShow: async (accountId, { accountsRepository }) => {
+  const account = await accountsRepository.get(accountId);
+  return account.favouriteTvShows;
+},
+addFavouriteTvShow: async (accountId, tvShowId, { accountsRepository }) => {
+  const account = await accountsRepository.get(accountId);
+  if(account.tvShowId != tvShowId){
+    account.favouriteTvShows.push(tvShowId);
+  }else{
+    throw new Error('Tv Show has already been added to favourites!');
+  }
+  return await accountsRepository.merge(account);
+},
 };
+
+

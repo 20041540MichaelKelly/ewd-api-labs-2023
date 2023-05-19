@@ -12,7 +12,9 @@ export default class extends AccountRepository {
             email: {type: String, unique: true, index: true},
             password: String,
             favourites: [Number],
-            favoritePeople: [Number]
+            favoritePeople: [Number],
+            favoriteTvShows: [Number]
+
         });
         this.model = mongoose.model('Account', accountsSchema);
     }
@@ -26,8 +28,8 @@ export default class extends AccountRepository {
     }
 
     async merge(accountEntity) {
-        const {id, firstName, lastName, email, password, favourites } = accountEntity;
-        await this.model.findByIdAndUpdate(id, { firstName, lastName, email, password, favourites });
+        const {id, firstName, lastName, email, password, favourites, favouritePeople, favouriteTvShows} = accountEntity;
+        await this.model.findByIdAndUpdate(id, { firstName, lastName, email, password, favourites, favouritePeople, favouriteTvShows});
         console.log({id, firstName, lastName, email, password, favourites });
         return accountEntity;
     }
@@ -38,19 +40,19 @@ export default class extends AccountRepository {
 
     async get(userId) {
         const result = await this.model.findById(userId);
-        const {id, firstName, lastName, email, password, favourites } = result;
-        return new Account(id, firstName, lastName, email, password, favourites );
+        const {id, firstName, lastName, email, password, favourites, favouritePeople, favouriteTvShows } = result;
+        return new Account(id, firstName, lastName, email, password, favourites, favouritePeople, favouriteTvShows);
     }
 
     async getByEmail(userEmail) {
         const result = await this.model.findOne({email: userEmail});
-        return new Account(result.id, result.firstName, result.lastName, result.email, result.password,result.favourites);
+        return new Account(result.id, result.firstName, result.lastName, result.email, result.password,result.favourites, result.favouritePeople, result.favouriteTvShows);
     }
 
     async find() {
         const accounts = await this.model.find();
         return accounts.map((result) => {
-            return new Account(result.id, result.firstName, result.lastName, result.email, result.password, result.favourites);
+            return new Account(result.id, result.firstName, result.lastName, result.email, result.password, result.favourites, result.favouritePeople, result.favouriteTvShows);
         });
     }
 }

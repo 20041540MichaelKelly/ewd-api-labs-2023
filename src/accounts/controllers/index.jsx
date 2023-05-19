@@ -82,6 +82,26 @@ export default (dependencies) => {
             next(new Error(`Invalid Data ${err.message}`));
         }
     };
+    const addFavouriteTvShow = async (request, response, next) => {
+        try {
+            const { tvShowId } = request.body;
+            console.log(tvShowId);
+            const id = request.params.id;
+            const account = await accountService.addFavouriteTvShow(id, tvShowId, dependencies);
+            response.status(200).json(account);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getFavouriteTvShow = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getFavouriteTvShow(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
     //... code as before
     const verify = async (request, response, next) => {
         try { 
@@ -111,6 +131,8 @@ export default (dependencies) => {
         getFavourites,
         addFavouritePerson,
         getFavouritePerson,
+        addFavouriteTvShow,
+        getFavouriteTvShow,
        // removeFavourite,
         verify  //ADD THIS
     };

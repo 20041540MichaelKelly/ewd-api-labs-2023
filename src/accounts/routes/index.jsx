@@ -28,11 +28,17 @@ const createRouter = (dependencies) => {
     router.route('/:id/favourites')
         .get(accountsController.getFavourites);
 
-        router.route('/:id/favouritePeople')
+    router.route('/:id/favouritePeople')
         .post(accountsController.addFavouritePerson);
         
     router.route('/:id/favouritePeople')
         .get(accountsController.getFavouritePerson);
+
+    router.route('/:id/favouriteTvShow')
+        .post(accountsController.addFavouriteTvShow);
+        
+    router.route('/:id/favouriteTvShow')
+        .get(accountsController.getFavouriteTvShow);
 
     const validationController = ValidationController(dependencies);//Add this lineLoad validation controller with dependencies
 
