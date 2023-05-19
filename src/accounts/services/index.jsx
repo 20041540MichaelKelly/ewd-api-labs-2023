@@ -54,5 +54,22 @@ export default {
     }
     const token = JSON.stringify({ email: account.email });//JUST Temporary!!! TODO: make it better
     return token;
-}
+},
+/**
+ * People
+ */
+getFavouritePerson: async (personId, { accountsRepository }) => {
+  const account = await accountsRepository.get(personId);
+  return account.favouritePeople;
+},
+addFavouritePerson: async (accountId, personId, { accountsRepository }) => {
+  const account = await accountsRepository.get(accountId);
+  console.log(accountId);
+  if(account.personId != personId){
+    account.favouritePeople.push(personId);
+  }else{
+    throw new Error('Person has already been added to favourites!');
+  }
+  return await accountsRepository.merge(account);
+},
 };

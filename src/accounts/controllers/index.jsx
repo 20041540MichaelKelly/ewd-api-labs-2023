@@ -62,6 +62,26 @@ export default (dependencies) => {
             next(new Error(`Invalid Data ${err.message}`));
         }
     };
+    const addFavouritePerson = async (request, response, next) => {
+        try {
+            const { personId } = request.body;
+            console.log(personId);
+            const id = request.params.id;
+            const account = await accountService.addFavouritePerson(id, personId, dependencies);
+            response.status(200).json(account);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getFavouritePerson = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getFavouritePerson(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
     //... code as before
     const verify = async (request, response, next) => {
         try { 
@@ -89,6 +109,8 @@ export default (dependencies) => {
         authenticateAccount,
         addFavourite,
         getFavourites,
+        addFavouritePerson,
+        getFavouritePerson,
        // removeFavourite,
         verify  //ADD THIS
     };

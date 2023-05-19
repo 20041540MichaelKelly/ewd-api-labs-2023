@@ -11,7 +11,8 @@ export default class extends AccountRepository {
             lastName: String,
             email: {type: String, unique: true, index: true},
             password: String,
-            favourites: [Number]
+            favourites: [Number],
+            favoritePeople: [Number]
         });
         this.model = mongoose.model('Account', accountsSchema);
     }
