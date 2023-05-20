@@ -11,12 +11,14 @@ export default (dependencies) => {
         response.status(200).json(tvShow);
     };
 
-    // const getUpcomingMovies = async (request, response, next) => {
-    //     // Treatment
-    //     const movie = await moviesService.getUpcomingMovies(movieId, dependencies);
-    //     //output
-    //     response.status(200).json(movie);
-    // };
+    const getTvShowImages = async (request, response, next) => {
+        //input
+        const tvShowId = request.params.id;
+        // Treatment
+        const tvShow = await tvService.getTvShowImages(tvShowId, dependencies);
+        //output
+        response.status(200).json(tvShow);
+    };
     const listTvShows = async (request, response, next) => {
         //input
         const query = request.query;
@@ -25,10 +27,37 @@ export default (dependencies) => {
         //output
         response.status(200).json(tvShows);
     };
-
+    const getTvShowCredits= async (request, response, next) => {
+        //input
+        const tvShowId = request.params.id;
+        // Treatment
+        const tvShow = await tvService.getTvShowCredits(tvShowId, dependencies);
+        //output
+        response.status(200).json(tvShow);
+    };
+    const getTvShowAggregateCredits = async (request, response, next) => {
+        //input
+        const tvShowId = request.params.id;
+        // Treatment
+        const tvShow = await tvService.getTvShowAggregateCredits(tvShowId, dependencies);
+        //output
+        response.status(200).json(tvShow);
+    };
+    const getSimilarTvShows = async (request, response, next) => {
+        //input
+        const tvShowId = request.params.id;
+        // Treatment
+        const tvShow = await tvService.getSimilarTvShows(tvShowId, dependencies);
+        //output
+        response.status(200).json(tvShow);
+    };
     return {
         getTvShow,
         listTvShows,
+        getTvShowImages,
+        getTvShowCredits,
+        getTvShowAggregateCredits,
+        getSimilarTvShows
         //getUpcomingMovies
     };
 };

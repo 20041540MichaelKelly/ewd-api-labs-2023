@@ -43,8 +43,11 @@ const createMoviesRouter = (dependencies) => {
     router.route('/popular')
         .get(moviesController.getPopularMovies); 
 
-        router.route('/now_playing')
+    router.route('/now_playing')
         .get(moviesController.getMoviesNowPlaying);
+
+    router.route('/:id/similar')
+        .get(moviesController.getSimilarMovies);    
 
     return router;
 };

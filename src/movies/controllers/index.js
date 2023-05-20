@@ -71,6 +71,14 @@ export default (dependencies) => {
         //output
         response.status(200).json(movie);
     };
+    const getSimilarMovies = async (request, response, next) => {
+        //input
+        const movieId = request.params.id;
+        // Treatment
+        const movie = await moviesService.getSimilarMovies(movieId, dependencies);
+        //output
+        response.status(200).json(movie);
+    };
 
     return {
         getMovie,
@@ -81,6 +89,7 @@ export default (dependencies) => {
         postMovieReviews,
         getPopularMovies,
         getMoviesNowPlaying,
-        getMovieCredits
+        getMovieCredits,
+        getSimilarMovies
     };
 };

@@ -15,8 +15,17 @@ const createTvShowRouter = (dependencies) => {
     router.route('/')
         .get(tvShowController.listTvShows); 
 
-    // router.route('/:id/reviews')
-    //     .get(moviesController.getMovieReviews);
+    router.route('/:id/credits')
+        .get(tvShowController.getTvShowCredits);  
+        
+    router.route('/:id/images')
+        .get(tvShowController.getTvShowImages);    
+
+    router.route('/:id/aggregate_credits')
+        .get(tvShowController.getTvShowAggregateCredits);
+    
+    router.route('/:id/similar')
+        .get(tvShowController.getSimilarTvShows);      
 
     return router;
 };
