@@ -13,9 +13,9 @@ export default (dependencies) => {
 
     const getUpcomingMovies = async (request, response, next) => {
         // Treatment
-        const movie = await moviesService.getUpcomingMovies(movieId, dependencies);
+        const movies = await moviesService.getUpcomingMovies(dependencies);
         //output
-        response.status(200).json(movie);
+        response.status(200).json(movies);
     };
     const find = async (request, response, next) => {
         //input
@@ -26,9 +26,29 @@ export default (dependencies) => {
         response.status(200).json(movies);
     };
 
+    const getMovieImages = async (request, response, next) => {
+        const movieId = request.params.id;
+
+        // Treatment
+        const images = await moviesService.getMovieImages(movieId, dependencies);
+        //output
+        response.status(200).json(images);
+    };
+
+    const getMovieReviews = async (request, response, next) => {
+        const movieId = request.params.id;
+
+        // Treatment
+        const reviews = await moviesService.getMovieReviews(movieId, dependencies);
+        //output
+        response.status(200).json(reviews);
+    };
+
     return {
         getMovie,
         find,
-        getUpcomingMovies
+        getUpcomingMovies,
+        getMovieImages,
+        getMovieReviews
     };
 };
