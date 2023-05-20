@@ -16,6 +16,9 @@ const createPersonsRouter = (dependencies) => {
         .get(personsController.listPeople);     
 
 
+    router.route('/:id/credits')
+        .get(moviesController.getActorCredits);
+
     return router;
 };
 export default createPersonsRouter;
