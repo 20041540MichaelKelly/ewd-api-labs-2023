@@ -27,6 +27,15 @@ export default (dependencies) => {
         //output
         response.status(200).json(person);
     };
+
+    const getActorImages= async (request, response, next) => {
+        //input
+        const personId = request.params.id;
+        // Treatment
+        const person = await personService.getActorImages(personId, dependencies);
+        //output
+        response.status(200).json(person);
+    };
     
     const listPeople = async (request, response, next) => {
         // Treatment
@@ -40,7 +49,8 @@ export default (dependencies) => {
         getPerson,
         getPersons,
         listPeople,
-        getActorCredits
+        getActorCredits,
+        getActorImages
         // updatePerson,
        // removeFavourite,
         //verify  //ADD THIS
