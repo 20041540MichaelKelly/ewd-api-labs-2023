@@ -43,15 +43,23 @@ export default (dependencies) => {
         //output
         response.status(200).json(reviews);
     };
+    const postMovieReviews = async (request, response, next) => {
+        const movieId = request.params.id;
+
+        // Treatment
+        const reviews = await moviesService.postMovieReviews(movieId, dependencies);
+        //output
+        response.status(200).json(reviews);
+    };
     const getPopularMovies = async (request, response, next) => {
         // Treatment
         const movies = await moviesService.getPopularMovies(dependencies);
         //output
         response.status(200).json(movies);
     };
-    const getNowPlayingMovies = async (request, response, next) => {
+    const getMoviesNowPlaying = async (request, response, next) => {
         // Treatment
-        const movies = await moviesService.getNowPlayingovies(dependencies);
+        const movies = await moviesService.getMoviesNowPlaying(dependencies);
         //output
         response.status(200).json(movies);
     };
@@ -70,8 +78,9 @@ export default (dependencies) => {
         getUpcomingMovies,
         getMovieImages,
         getMovieReviews,
+        postMovieReviews,
         getPopularMovies,
-        getNowPlayingMovies,
+        getMoviesNowPlaying,
         getMovieCredits
     };
 };

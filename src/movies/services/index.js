@@ -48,9 +48,9 @@ export default {
         return response.data;
       },
   
-    postMovieReviews: async (id) => {
+    postMovieReviews: async (movieId) => {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_KEY}`
+        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${process.env.TMDB_KEY}`
         );
         return response.data;
       },

@@ -22,11 +22,20 @@ const createMoviesRouter = (dependencies) => {
     router.route('/:id/images')
         .get(moviesController.getMovieImages);
 
+
+/**
+ *************** Reviews
+ */
     router.route('/:id/reviews')
         .get(moviesController.getMovieReviews);
 
+        router.route('/:id/reviews')
+        .get(moviesController.postMovieReviews);    
+
     router.route('/upcoming')
-        .get(moviesController.getUpcomingMovies);   
+        .get(moviesController.getUpcomingMovies);  
+/**
+ * ****************** */ 
         
     router.route('/:id/credits')
         .get(moviesController.getMovieCredits);
@@ -35,7 +44,7 @@ const createMoviesRouter = (dependencies) => {
         .get(moviesController.getPopularMovies); 
 
         router.route('/now_playing')
-        .get(moviesController.getNowPlayingMovies);
+        .get(moviesController.getMoviesNowPlaying);
 
     return router;
 };
