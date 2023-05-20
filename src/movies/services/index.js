@@ -48,7 +48,7 @@ export default {
         return response.data;
       },
   
-    postMovieReviews: async (data) => {
+    postMovieReviews: async (id) => {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_KEY}`
         );
@@ -56,21 +56,32 @@ export default {
       },
   
     getUpcomingMovies: async (page) => {
-  
-      page ? page : 1;
-      const response = await axios.get(
+        const response = await axios.get(
         `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&page=${page}`
         );
         return response.data;
       },
   
       getMoviesNowPlaying:async (page) => {
-        page ? page : 1;
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&page=${page}`
           );
         return response.data;
       },
+
+      getPopularMovies:async (page) => {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&include_adult=false&page=${page}`
+          );
+        return response.data;
+      },
+
+      getMovieCredits: async (id) => {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_KEY}`
+          );
+          return response.data;
+        },
   
   //     export const getPopularMovies = ({queryKey}) => {
   //       const [, pagePart] = queryKey;
