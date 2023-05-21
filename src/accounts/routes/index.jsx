@@ -1,7 +1,5 @@
 import express from 'express';
 import AccountsController from '../controllers';
-import ValidationController from '../controllers/ValidationController'; //add to import statements at top of file
-
 
 const createRouter = (dependencies) => {
     const router = express.Router();
@@ -16,22 +14,26 @@ const createRouter = (dependencies) => {
     router.route('/:id')
         .get(accountsController.getAccount);
 
+    
+    router.route('/:email')
+        .get(accountsController.getAccountForEmail);    
+
     router.route('/:id')
         .post(accountsController.updateAccount);
 
     router.route('/security/token')
         .post(accountsController.authenticateAccount);
 
-        router.route('/:id/favourites')
+    router.route('/:id/favourite')
         .post(accountsController.addFavourite);
         
-    router.route('/:id/favourites')
+    router.route('/:id/favourite')
         .get(accountsController.getFavourites);
 
-    router.route('/:id/favouritePeople')
+    router.route('/:id/favouritePerson')
         .post(accountsController.addFavouritePerson);
         
-    router.route('/:id/favouritePeople')
+    router.route('/:id/favouritePerson')
         .get(accountsController.getFavouritePerson);
 
     router.route('/:id/favouriteTvShow')
@@ -39,11 +41,6 @@ const createRouter = (dependencies) => {
         
     router.route('/:id/favouriteTvShow')
         .get(accountsController.getFavouriteTvShow);
-
-    const validationController = ValidationController(dependencies);//Add this lineLoad validation controller with dependencies
-
-    router.route('/')
-        .post(validationController.validateAccount, accountsController.createAccount); //add validateAccount to route
 
     return router;
 };

@@ -9,6 +9,9 @@ export default {
   getAccount: (accountId, {accountsRepository}) => {
     return accountsRepository.get(accountId);
   },
+  getAccountForEmail: async(email, {accountsRepository}) => {
+    return accountsRepository.getByEmail(email);
+  },
   authenticate: async (email, password, { accountsRepository, authenticator, tokenManager }) => {
     const account = await accountsRepository.getByEmail(email);
     const result = await authenticator.compare(password, account.password);
@@ -38,7 +41,7 @@ export default {
   },
   addFavourite: async (accountId, movieId, { accountsRepository }) => {
     const account = await accountsRepository.get(accountId);
-    if(account.movieId != movieId){
+    if(account.favourites.movieId != movieId){
       account.favourites.push(movieId);
     }else{
       throw new Error('Movie has already been added to favourites!');

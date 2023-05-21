@@ -1,5 +1,6 @@
 import express from 'express';
 import MoviesController from '../controllers';
+
 //import AccountsController from '../../accounts/controllers';
 
 
@@ -47,7 +48,7 @@ const createMoviesRouter = (dependencies) => {
         .get(moviesController.getMoviesNowPlaying);
 
     router.route('/:id/similar')
-        .get(moviesController.getSimilarMovies);    
+        .get(moviesController.getSimilarMovies);     
 
     return router;
 };

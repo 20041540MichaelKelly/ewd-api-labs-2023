@@ -55,4 +55,14 @@ export default class extends AccountRepository {
             return new Account(result.id, result.firstName, result.lastName, result.email, result.password, result.favourites, result.favouritePeople, result.favouriteTvShows);
         });
     }
+
+    async useUserIdGetFavourites(userId) {
+        const accounts = await this.model.findById(userId);
+        let favs = [];
+        accounts.map((result) => {
+            console.log(result.favourites);
+            favs.push(result.favourites);
+        });
+        return favs;
+    }
 }

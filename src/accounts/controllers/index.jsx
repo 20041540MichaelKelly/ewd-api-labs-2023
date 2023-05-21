@@ -18,6 +18,14 @@ export default (dependencies) => {
         //output
         response.status(200).json(account);
     };
+    const getAccountForEmail = async (request, response, next) => {
+        //input
+        const email = request.params.email;
+        // Treatment
+        const account = await accountService.getAccountForEmail(email, dependencies);
+        //output
+        response.status(200).json(account);
+    };
     const updateAccount = async (request, response, next) => {
         // Input
         const id = request.params.id;
@@ -38,7 +46,8 @@ export default (dependencies) => {
         try {
             const { email, password } = request.body;
             const token = await accountService.authenticate(email, password, dependencies);
-            response.status(200).json({ token: `BEARER ${token}` });
+            const user = await accountService.getAccountForEmail(email, dependencies);
+            response.status(200).json({ token: `BEARER ${token}`, userId: user.id });
         } catch (error) {
             response.status(401).json({ message: 'Unauthorised' });
         }
@@ -124,6 +133,7 @@ export default (dependencies) => {
     return {
         createAccount,
         getAccount,
+        getAccountForEmail,
         listAccounts,
         updateAccount,
         authenticateAccount,

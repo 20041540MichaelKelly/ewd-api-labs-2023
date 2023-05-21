@@ -10,5 +10,4 @@ export default class extends Authenticator {
       return Promise.resolve(false);
     }
 }
-
 }
