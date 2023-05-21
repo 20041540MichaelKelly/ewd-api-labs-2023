@@ -18,6 +18,14 @@ export default (dependencies) => {
         //output
         response.status(200).json(account);
     };
+    const getAccountForEmail = async (request, response, next) => {
+        //input
+        const email = request.params.email;
+        // Treatment
+        const account = await accountService.getAccountForEmail(email, dependencies);
+        //output
+        response.status(200).json(account);
+    };
     const updateAccount = async (request, response, next) => {
         // Input
         const id = request.params.id;
@@ -38,7 +46,8 @@ export default (dependencies) => {
         try {
             const { email, password } = request.body;
             const token = await accountService.authenticate(email, password, dependencies);
-            response.status(200).json({ token: `BEARER ${token}` });
+            const user = await accountService.getAccountForEmail(email, dependencies);
+            response.status(200).json({ token: `BEARER ${token}`, userId: user.id });
         } catch (error) {
             response.status(401).json({ message: 'Unauthorised' });
         }
@@ -57,6 +66,46 @@ export default (dependencies) => {
         try {
             const id = request.params.id;
             const favourites = await accountService.getFavourites(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const addFavouritePerson = async (request, response, next) => {
+        try {
+            const { personId } = request.body;
+            console.log(personId);
+            const id = request.params.id;
+            const account = await accountService.addFavouritePerson(id, personId, dependencies);
+            response.status(200).json(account);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getFavouritePerson = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getFavouritePerson(id, dependencies);
+            response.status(200).json(favourites);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const addFavouriteTvShow = async (request, response, next) => {
+        try {
+            const { tvShowId } = request.body;
+            console.log(tvShowId);
+            const id = request.params.id;
+            const account = await accountService.addFavouriteTvShow(id, tvShowId, dependencies);
+            response.status(200).json(account);
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
+        }
+    };
+    const getFavouriteTvShow = async (request, response, next) => {
+        try {
+            const id = request.params.id;
+            const favourites = await accountService.getFavouriteTvShow(id, dependencies);
             response.status(200).json(favourites);
         } catch (err) {
             next(new Error(`Invalid Data ${err.message}`));
@@ -84,11 +133,16 @@ export default (dependencies) => {
     return {
         createAccount,
         getAccount,
+        getAccountForEmail,
         listAccounts,
         updateAccount,
         authenticateAccount,
         addFavourite,
         getFavourites,
+        addFavouritePerson,
+        getFavouritePerson,
+        addFavouriteTvShow,
+        getFavouriteTvShow,
        // removeFavourite,
         verify  //ADD THIS
     };
