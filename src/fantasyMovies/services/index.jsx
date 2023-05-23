@@ -28,7 +28,10 @@ export default {
     const account = await accountsRepository.getByEmail(email);
     if(account != null){
       console.log("Retrieved an account for email, comparing passwords now...");
+      return response.status(401).json('Email already exists');
+
       throw new Error('Email already exists!');
+
     }
     console.log("Retrieved an account for email, comparing passwords now...");
 
