@@ -1,4 +1,4 @@
-import Account from '../entities/Account';
+import Account from '../entities/FantasyMovie';
 import mongoose from 'mongoose';
 import AccountRepository from './Repository';
 import { response } from 'express';
@@ -7,32 +7,32 @@ export default class extends AccountRepository {
 
     constructor() {
         super();
-        const accountsSchema = new mongoose.Schema({
-            firstName: String,
-            lastName: String,
-            email: {type: String, unique: true, index: true},
-            password: String,
-            favourites: [Number],
-            favoritePeople: [Number],
-            favoriteTvShows: [Number]
-
+        const fantasyMovieSchema = new mongoose.Schema({
+            title: String,
+            time: time,
+            genres: [String],
+            productionCompany: String,
+            date: Date,
+            image: String
         });
-        this.model = mongoose.model('Account', accountsSchema);
+        this.model = mongoose.model('FantasyMovie', fantasyMovieSchema);
     }
 
-    async persist(accountEntity) {
-        const {firstName, lastName, email, password} = accountEntity;
-        const result = new this.model({firstName, lastName, email, password});
+    async persist(movieEntity) {
+        console.log('Persisting the data...');
+        const {title, time, genres, productionCompany, date, image} = movieEntity;
+        const result = new this.model({title, time, genres, productionCompany, date, image});
         await result.save();
-        accountEntity.id=result.id;
-        return accountEntity;
+        movieEntity.id=result.id;
+        return movieEntity;
     }
 
-    async merge(accountEntity) {
-        const {id, firstName, lastName, email, password, favourites, favouritePeople, favouriteTvShows} = accountEntity;
-        await this.model.findByIdAndUpdate(id, { firstName, lastName, email, password, favourites, favouritePeople, favouriteTvShows});
-        console.log({id, firstName, lastName, email, password, favourites });
-        return accountEntity;
+    async merge(movieEntity) {
+        console.log('Merging the data...');
+        const {id, title, time, genres, productionCompany, date, image} = movieEntity;
+        await this.model.findByIdAndUpdate(id, {title, time, genres, productionCompany, date, image});
+        console.log({id,title, time, genres, productionCompany, date, image});
+        return movieEntity;
     }
 
     async remove(userId) {
@@ -61,9 +61,9 @@ export default class extends AccountRepository {
     }
 
     async find() {
-        const accounts = await this.model.find();
-        return accounts.map((result) => {
-            return new Account(result.id, result.firstName, result.lastName, result.email, result.password, result.favourites, result.favouritePeople, result.favouriteTvShows);
+        const fanatsyMovies = await this.model.find();
+        return fanatsyMovies.map((result) => {
+            return new Account(result.id, result.title, result.time, result.genres, result.productionCompany, result.date, result.image);
         });
     }
 

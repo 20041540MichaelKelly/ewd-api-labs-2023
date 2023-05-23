@@ -1,16 +1,16 @@
-import accountService from "../services";
+import fantasyMovieService from "../services";
 
 export default (dependencies) => {
 
-    const createAccount = async (request, response, next) => {
+    const createFantasyMovie = async (request, response, next) => {
         try {
             // Input
             const { firstName, lastName, email, password } = request.body;
             // Treatment
-            const account = await accountService.registerAccount(firstName, lastName, email, password, dependencies);
-            console.log("account created...");
+            const account = await fantasyMovieService.registerAccount(title, time, genres, date, dependencies);
+            console.log("fantasy movie created...");
             //output
-            response.status(201).json('Account created');
+            response.status(201).json({message:'Fantasy Movie created'});
 
         } catch (err) {
             response.status(400).json(`Invalid Data ${err.message}`);
