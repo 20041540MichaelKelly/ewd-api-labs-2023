@@ -8,6 +8,5 @@ export default class {
       this.favourites = favourites;
       this.favouritePeople = favouritePeople;
       this.favouriteTvShows = favouriteTvShows;
-
     }
   }

@@ -1,12 +1,12 @@
 export default (dependencies) => {
 
-    const { accountSchema } = dependencies;
+    const { fantasyMovieSchema } = dependencies;
 
-    const validateAccount = async (request, response, next) => {
+    const validateFantasyMovie = async (request, response, next) => {
         // Input
         try {
-            console.log('Validating account...');
-            const validated = await accountSchema['account'].validateAsync(request.body);
+            console.log('Validating entry fields for fantasy Movie...');
+            const validated = await fantasyMovieSchema['fantasyMovie'].validateAsync(request.body);
             request.body = validated;
             console.log('Validation complete');
 
@@ -18,6 +18,6 @@ export default (dependencies) => {
     };
 
     return {
-        validateAccount
+        validateFantasyMovie
     };
 };

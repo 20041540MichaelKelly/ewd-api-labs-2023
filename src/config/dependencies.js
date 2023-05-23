@@ -23,8 +23,8 @@ const buildDependencies = () => {
   if (process.env.DATABASE_DIALECT === "in-memory") {
     dependencies.accountsRepository = new AccountsRepositoryInMemory();
   }  else if (process.env.DATABASE_DIALECT === "mongo") {
-    dependencies.accountsRepository = new AccountsRepositoryMongo();
     dependencies.accountSchema = AccountSchema;
+    dependencies.accountsRepository = new AccountsRepositoryMongo();
     dependencies.genresRepository = new GenresRepositoryMongo();
     dependencies.genresSchema = GenresSchema;
     dependencies.tokenManager = new TokenManager();

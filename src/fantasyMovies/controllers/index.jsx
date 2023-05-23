@@ -1,16 +1,16 @@
-import accountService from "../services";
+import fantasyMovieService from "../services";
 
 export default (dependencies) => {
 
-    const createAccount = async (request, response, next) => {
+    const createFantasyMovie = async (request, response, next) => {
         try {
             // Input
             const { firstName, lastName, email, password } = request.body;
             // Treatment
-            const account = await accountService.registerAccount(firstName, lastName, email, password, dependencies);
-            console.log("account created...");
+            const account = await fantasyMovieService.registerAccount(title, time, genres, date, dependencies);
+            console.log("fantasy movie created...");
             //output
-            response.status(201).json(account);
+            response.status(201).json({message:'Fantasy Movie created'});
 
         } catch (err) {
             response.status(400).json(`Invalid Data ${err.message}`);
@@ -53,11 +53,9 @@ export default (dependencies) => {
             const { email, password } = request.body;
             const token = await accountService.authenticate(email, password, dependencies);
             const user = await accountService.getAccountForEmail(email, dependencies);
-            response.sendStatus(200).json({ token: `BEARER ${token}`, userId: user.id });
+            response.status(200).json({ token: `BEARER ${token}`, userId: user.id });
         } catch (error) {
-            res.status(err.status || 401).json({status: err.status, message: err.message})
-
-            //response.status(401).json({ message: 'Unauthorised' });
+            response.status(401).json({ message: 'Unauthorised' });
         }
     };
     const addFavourite = async (request, response, next) => {
