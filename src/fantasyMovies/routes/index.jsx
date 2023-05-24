@@ -16,7 +16,7 @@ const createRouter = (dependencies) => {
         .get(fantasyMovieController.listFantasyMovies);
 
     router.route('/:id')
-        .get(accountsController.getFantasyMovie);
+        .get(fantasyMovieController.getFantasyMovie);
 
 
     return router;
