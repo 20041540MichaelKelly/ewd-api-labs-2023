@@ -5,10 +5,12 @@ export default (dependencies) => {
     const createFantasyMovie = async (request, response, next) => {
         try {
             // Input
-            const { title, time, genres, date, productionCompany,overView, image  } = request.body;
+            console.log('Creating Fantasy movie...');
+            const { title, time, genres, productionCompany,overView } = request.body;
+            console.log(request.body);
             // Treatment
-            const fantasyMovie = await fantasyMovieService.registerFantasyMovie(title, time, genres, date, productionCompany,overView, image, dependencies);
-            console.log("fantasy movie created...");
+            const fantasyMovie = await fantasyMovieService.registerFantasyMovie(title, time, genres, productionCompany,overView, dependencies);
+            console.log("fantasy movie created!");
             //output
             response.status(201).json(fantasyMovie);
 
@@ -21,7 +23,7 @@ export default (dependencies) => {
         //input
         const fMovieId = request.params.id;
         // Treatment
-        const fMovie = await fantasyMovieService.getMovie(fMovieId, dependencies);
+        const fMovie = await fantasyMovieService.getFanatasyMovie(fMovieId, dependencies);
         //output
         response.status(200).json(fMovie);
     };

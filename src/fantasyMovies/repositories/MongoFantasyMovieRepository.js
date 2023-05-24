@@ -1,10 +1,9 @@
-import Account from '../entities/FantasyMovie';
 import mongoose from 'mongoose';
-import AccountRepository from './Repository';
+import FantasyMovieRepository from './Repository';
 import { response } from 'express';
 import FantasyMovie from '../entities/FantasyMovie';
 
-export default class extends AccountRepository {
+export default class extends FantasyMovieRepository {
 
     constructor() {
         super();
@@ -24,7 +23,7 @@ export default class extends AccountRepository {
         const {title, time, genres, productionCompany, date, overView} = movieEntity;
         const result = new this.model({title, time, genres, productionCompany, date, overView});
         await result.save();
-        console.log('Fanatasy Movie has now been persisted!')
+        console.log('Fanatasy Movie has now been persisted!');
         movieEntity.id=result.id;
         return movieEntity;
     }
@@ -44,7 +43,7 @@ export default class extends AccountRepository {
     async get(fMovieId) {
         console.log(`Getting user by ${fMovieId}...`);
 
-        const result = await this.model.findById(userId);
+        const result = await this.model.findById(fMovieId);
         const {id, title, time, genres, productionCompany, date, overView}  = result;
         return new FantasyMovie(id, title, time, genres, productionCompany, date, overView);
     }

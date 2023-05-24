@@ -1,7 +1,7 @@
 import FantasyMovie from '../entities/FantasyMovie';
 
 export default {
-  registerFantasyMovie: async (title, time, genres, date, productionCompany, overView, image, { fantasyMovieRepository, authenticator }) => {
+  registerFantasyMovie: async (title, time, genres, productionCompany, overView, { fantasyMovieRepository }) => {
     console.log("Validating that title does not exist!");
     const result = await fantasyMovieRepository.getByTitle(title);
     if (result) {
@@ -9,7 +9,7 @@ export default {
       throw new Error('Title already exists! ');
     }
     console.log("Beginning Fantasy Movie Creation process...");
-    const fantasyMovie = new FantasyMovie(undefined, title, time, genres, date, productionCompany, overView, image);
+    const fantasyMovie = new FantasyMovie(undefined, title, time, genres, productionCompany, overView);
     console.log("Fantasy Movie Creation process finished!");
     return fantasyMovieRepository.persist(fantasyMovie);
   },
