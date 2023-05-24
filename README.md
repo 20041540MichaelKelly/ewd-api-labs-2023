@@ -10,7 +10,10 @@ __Name:__ [Michael Kelly 20041540]
 + Post a favourite TV show: Post a tvShowId into a list called favouriteTvShows.
 + Get a list of Actors: Get a list of actors that the user can view.
 + Add a Actor as a Favourite: Add an actor as a favourite person.
-+ Changed over API calls: Changed all the api calls from tmdb-api to movie-api. The app still functions as it would with the tmdb api 
++ Changed over API calls: Changed all the api calls from tmdb-api to movie-api. The app still functions as it would with the tmdb api
+ 
+> A list of api calls through the movie-api that was created for the assignment.
+![][api_calls]
 
 # Installation Requirements
 This project was coded within a Dev/container. I had created a codespace also following the labs but the limit of 60hrs was not appealing so opted for the free option of using Docker Desktop and using a mongodb connection.
@@ -77,10 +80,11 @@ Colons can be used to align columns.
 | api/accounts/security/token    | /	                                                       |/              | creates a token for the newly created account           | /       |
 
 # Security and Authentication
-[Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected. REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB]
-
-[Give details of the routes that have authentication. ]
-
+User would have to have a validated to be able to access any part of the application unless it was the signup and login screen.
+  
+> Example of the token generated.
+![][token]
+  
 # Validation
 [Briefly describe and extra data validation you added to the API, and where it is implemented in the App.]
 ```
@@ -98,6 +102,15 @@ Explanation:
   + genres must be have 1 minimum and a maximum of 15 letters, genres don't have special characters bacuse there is ('Horror, 'Comedy', 'Action'..etc)
   + date is easier to contain as a string, just format to lowercase
   + productionCompany 
+  
+> email already exists error
+![][error_email_already_exists]  
+  
+> email cant be empty
+![][error_email_not_empty]  
+  
+> password must contain 4 or more characters
+![][error_passwords_must_be_four]  
 # Testing
 Briefly state how you tested the API.
 
@@ -110,12 +123,8 @@ There was extensive console logging as shown in the screenshot; This is needed f
 The regex is explained in the validation section so it was my job in this step to create a fantasy movie while abiding by the validation rules that was set in the fantasyMovieSchema.
 
 
-Give an example of any automated testing results or link to a report.
-
-
 
 # Integrating with React App
-[Describe how you integrated your React app with the API. You can provide a link to the React App repo and give an example of an API call from React App. For example: ]
 The first step was to clone the assignment from Movie Labs assignment 1. Then the code that was calling the tmdb-api API was altered to use the new movie-api API that was created for thee assignment. 
 The process involved altering the original calls directly to the tmdb API to routing to the movie-api. While doing this we can perform validation on values been sent through. Here is an example of the adapted code with explanation:
 
@@ -138,13 +147,22 @@ export const getSimilarMovies = (args) => {
     });
 };
 
-This is an example of getting similar movies to the movie that the user is currently viewing. It takes in an argument (args) and extracts the id, which in turn passes the id as a parameter in the url to the API. The API then does all the heavy lifting. This API call also checks to ensure that the user has a token associated with them from a successful login. Then we take our response returned from the A
-[You can also add images of React app here also if you wish. This can be also shown in the video]
+This is an example of getting similar movies to the movie that the user is currently viewing. It takes in an argument (args) and extracts the id, which in turn passes the id as a parameter in the url to the API. The API then does all the heavy lifting. This API call also checks to ensure that the user has a token associated with them from a successful login.
+  
+> extensive logging
+![][api_call]  
 
 # Extra features
 
 The database has been deployed to `MongoDb Atlas`
+  
+> extensive logging
+![][mongodb_atlas]
+  
 The API has been deployed to heroku `https://powerful-reef-03411.herokuapp.com/`
+> extensive logging
+![]heroku_running]
+  
 The front end that has been altered to adapt assignment 2 is hosted here `https://msc-front-end-movies-bp3d0mk5f-20041540michaelkelly.vercel.app/`
 I utilised `Robo3T` to ensure the connection got configured correctly to the remote location `atlas`
 `ChatGPT`is exceptional for creating regex to fulfil the requirements of the developer. That is what I used this "AI" for.
@@ -157,6 +175,9 @@ __Fantasy Movies__ The ability to create a fantasy movie that is validated and s
 + routes
 
 There is a lot of logging if you view the API's console. As and ex Technical Support Engineer, I value every log that is stratigically placed. Throughout the project console.log() messages are inserted to make the debugging process a lot more easier. In return you save time to use on more fun stuff as adding a new feature.
+  
+  > extensive logging
+ ![][more_logging]
 
 # Independent learning.
 I researched MongoDB Atlas to host the database and had never used robo3T to monitor database activity. 
@@ -167,30 +188,15 @@ Docker is an application that I would have used in my previous job, I still need
 I found the testing aspect of the project to be very Intriguing. I have always been fascinated at the amount of third party applications that are available to developers for testing. I would find creating an a pplication like Postman to be very appealing. 
 The testing phase was the best learning phase. I had created 70% of the API calls through this process.
   
-  [api_call]: ./images/api_calls.png
+[api_call]: ./images/api_calls.png
 [chatgpt]: ./images/chatgpt_regex.png
 [logging]: ./images/console_logging.png
 [error_email]: ./images/error_email_already_exists.png
-[playlist_favourite_icon_movie]: ./screenshots/playlist_favourite_icon_movie.png
-[error_email_exists_signup]: ./screenshots/error_email_exists_signup.png
-[success_signup]: ./screenshots/success_signup_alert.png
-[home_page_search]: ./screenshots/home_page_search.png
-[home_page]: ./screenshots/home_page1.png
-[home_page_movie_card]: ./screenshots/movie_cards_home_page.png
-[home_page_nav]: ./screenshots/home_page_nav.png
-[upcoming_movies]: ./screenshots/upcoming_movies1.png
-[hover_example]: ./screenshots/hover_example.png
-[review1]: ./screenshots/review1.png
-[review2]: ./screenshots/review2.png
-[create_a_fantasy_movie]: ./screenshots/create_a_fantasy_movie.png
-[fantasy_list]: ./screenshots/fantasy_list.png
-[fantasy_movie_details]: ./screenshots/fantasy_movie_details.png
-[movie_card1]: ./screenshots/movie_card1.png
-[actor_details]: ./screenshots/actors_details.png
-[similar_movies]: ./screenshots/similar_movies.png
-[actor_different_movie]: ./screenshots/actor_different_movie.png
-[tv_shows]: ./screenshots/tv_shows.png
-[tv_shows_fave_play]: ./screenshots/tv_shows_fave_play.png
-[tv_show_play_list]: ./screenshots/tv_show_playlist.png
-[tv_show_favourites]: ./screenshots/tv_show_favourotes.png
-[tv_similar]: ./screenshots/tv_similar.png
+[error_email_already_exists]: ./images/error_email_already_exists.png
+[error_email_not_empty]: ./images/error_email_not_empty.png
+[error_passwords_must_be_four]: ./images/error_passwords_must_be_four.png
+[heroku_running]: ./images/heroku_running.png
+[mongodb_atlas]: ./images/mongodb_atlas.png
+[more_logging]: ./images/more_logging.png
+[test]: ./images/test1.png
+[token]: ./images/token.png
