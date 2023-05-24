@@ -35,6 +35,8 @@ const pattern = /^[A-Za-z]{1,30}$/;
 React-Front-End Repo: git clone https://github.com/20041540MichaelKelly/Msc-Front-End-Movies.git.git
 Node-API Repo: git clone https://github.com/20041540MichaelKelly/ewd-api-labs-2023.git
 
+The link to youtube video: https://youtu.be/RZWbcnkonA8
+
 npm install 
 
 Front-end : npm run dev
