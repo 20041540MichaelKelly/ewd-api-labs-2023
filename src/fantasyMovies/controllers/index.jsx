@@ -5,119 +5,36 @@ export default (dependencies) => {
     const createFantasyMovie = async (request, response, next) => {
         try {
             // Input
-            const { firstName, lastName, email, password } = request.body;
+            console.log('Creating Fantasy movie...');
+            const { title, time, genres, productionCompany,overView } = request.body;
+            console.log(request.body);
             // Treatment
-            const account = await fantasyMovieService.registerAccount(title, time, genres, date, dependencies);
-            console.log("fantasy movie created...");
+            const fantasyMovie = await fantasyMovieService.registerFantasyMovie(title, time, genres, productionCompany,overView, dependencies);
+            console.log("fantasy movie created!");
             //output
-            response.status(201).json({message:'Fantasy Movie created'});
+            response.status(201).json(fantasyMovie);
 
         } catch (err) {
             response.status(400).json(`Invalid Data ${err.message}`);
         }
     };
-    const getAccount = async (request, response, next) => {
-        //input
-        const accountId = request.params.id;
-        // Treatment
-        const account = await accountService.getAccount(accountId, dependencies);
-        //output
-        response.status(200).json(account);
-    };
-    const getAccountForEmail = async (request, response, next) => {
-        //input
-        const email = request.params.email;
-        // Treatment
-        const account = await accountService.getAccountForEmail(email, dependencies);
-        //output
-        response.status(200).json(account);
-    };
-    const updateAccount = async (request, response, next) => {
-        // Input
-        const id = request.params.id;
 
-        const { firstName, lastName, email, password } = request.body;
+    const getFantasyMovie = async (request, response, next) => {
+        //input
+        const fMovieId = request.params.id;
         // Treatment
-        const account = await accountService.updateAccount(id, firstName, lastName, email, password, dependencies);
+        const fMovie = await fantasyMovieService.getFanatasyMovie(fMovieId, dependencies);
         //output
-        response.status(201).json(account);
+        response.status(200).json(fMovie);
     };
-    const listAccounts = async (request, response, next) => {
+    
+    const listFantasyMovies = async (request, response, next) => {
         // Treatment
-        const accounts = await accountService.find(dependencies);
+        const movies = await fantasyMovieService.find(dependencies);
         //output
         response.status(200).json(accounts);
     };
-    const authenticateAccount = async (request, response, next) => {
-        try {
-            const { email, password } = request.body;
-            const token = await accountService.authenticate(email, password, dependencies);
-            const user = await accountService.getAccountForEmail(email, dependencies);
-            response.status(200).json({ token: `BEARER ${token}`, userId: user.id });
-        } catch (error) {
-            response.status(401).json({ message: 'Unauthorised' });
-        }
-    };
-    const addFavourite = async (request, response, next) => {
-        try {
-            const { movieId } = request.body;
-            const id = request.params.id;
-            const account = await accountService.addFavourite(id, movieId, dependencies);
-            response.status(200).json(account);
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-    const getFavourites = async (request, response, next) => {
-        try {
-            const id = request.params.id;
-            const favourites = await accountService.getFavourites(id, dependencies);
-            response.status(200).json(favourites);
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-    const addFavouritePerson = async (request, response, next) => {
-        try {
-            const { personId } = request.body;
-            console.log(personId);
-            const id = request.params.id;
-            const account = await accountService.addFavouritePerson(id, personId, dependencies);
-            response.status(200).json(account);
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-    const getFavouritePerson = async (request, response, next) => {
-        try {
-            const id = request.params.id;
-            const favourites = await accountService.getFavouritePerson(id, dependencies);
-            response.status(200).json(favourites);
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-    const addFavouriteTvShow = async (request, response, next) => {
-        try {
-            const { tvShowId } = request.body;
-            console.log(tvShowId);
-            const id = request.params.id;
-            const account = await accountService.addFavouriteTvShow(id, tvShowId, dependencies);
-            response.status(200).json(account);
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-    const getFavouriteTvShow = async (request, response, next) => {
-        try {
-            const id = request.params.id;
-            const favourites = await accountService.getFavouriteTvShow(id, dependencies);
-            response.status(200).json(favourites);
-        } catch (err) {
-            next(new Error(`Invalid Data ${err.message}`));
-        }
-    };
-    //... code as before
+    
     const verify = async (request, response, next) => {
         try {
             // Input
@@ -137,18 +54,9 @@ export default (dependencies) => {
     };
 
     return {
-        createAccount,
-        getAccount,
-        getAccountForEmail,
-        listAccounts,
-        updateAccount,
-        authenticateAccount,
-        addFavourite,
-        getFavourites,
-        addFavouritePerson,
-        getFavouritePerson,
-        addFavouriteTvShow,
-        getFavouriteTvShow,
+        createFantasyMovie,
+        listFantasyMovies,
+        getFantasyMovie,
         // removeFavourite,
         verify  //ADD THIS
     };

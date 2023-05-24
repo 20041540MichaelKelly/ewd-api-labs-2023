@@ -1,13 +1,14 @@
 //* validators/register.validator.js
 import Joi from 'joi';
-const pattern = /^[A-Za-z]{1,30}$/;
-const passwordValidation = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,20}$/;
+const pattern = /^.{1,50}$/;
+const regex = /^.{10,500}$/;
 
 const fantasyMovieSchema = Joi.object({
     title: Joi.string().min(1),
-    time: Joi.string().time().lowercase().required(),
-    date: Joi.string().date().lowercase().required(),
-    productionCompany: Joi.string().min(1).regex(pattern).required(),
+    time: Joi.string().regex(/^\d{1,3}$/).required(),
+    genres: Joi.string().regex(/^.{3,15}$/).required(),
+    productionCompany: Joi.string().regex(pattern).required(),
+    overView: Joi.string().regex(regex).required(),
 });
 
 

@@ -10,11 +10,10 @@ export default (dependencies) => {
             const account = await accountService.registerAccount(firstName, lastName, email, password, dependencies);
             console.log("account created...");
             //output
-            response.status(201).json(account);
+            response.status(200).json(account);
 
         } catch (err) {
-            response.status(400).json(`Invalid Data ${err.message}`);
-        }
+            next(new Error(`Invalid Data ${err.message}`));        }
     };
     const getAccount = async (request, response, next) => {
         //input
@@ -50,14 +49,16 @@ export default (dependencies) => {
     };
     const authenticateAccount = async (request, response, next) => {
         try {
+            console.log('Authenticating account...');
             const { email, password } = request.body;
+            console.log(request.body);
             const token = await accountService.authenticate(email, password, dependencies);
+            console.log('token generated...');
             const user = await accountService.getAccountForEmail(email, dependencies);
-            response.sendStatus(200).json({ token: `BEARER ${token}`, userId: user.id });
-        } catch (error) {
-            res.status(err.status || 401).json({status: err.status, message: err.message})
-
-            //response.status(401).json({ message: 'Unauthorised' });
+            console.log('User returned for email');
+            response.status(200).json({ token: `BEARER ${token}`, userId: user.id });
+        } catch (err) {
+            next(new Error(`Invalid Data ${err.message}`));
         }
     };
     const addFavourite = async (request, response, next) => {

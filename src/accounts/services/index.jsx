@@ -26,9 +26,8 @@ export default {
     console.log("Authentication process started...");
 
     const account = await accountsRepository.getByEmail(email);
-    if(account != null){
-      console.log("Retrieved an account for email, comparing passwords now...");
-      throw new Error('Email already exists!');
+    if(account === null){
+      throw new Error('Email does not exists!');
     }
     console.log("Retrieved an account for email, comparing passwords now...");
 
@@ -86,19 +85,6 @@ export default {
     }
     return await accountsRepository.merge(account);
 
-  },
-  authenticate: async (email, password, { accountsRepository, authenticator }) => {
-    console.log("Getting account by email...");
-
-    const account = await accountsRepository.getByEmail(email);
-    console.log("Comparing password...");
-
-    const result = await authenticator.compare(password, account.password);
-    if (!result) {
-      throw new Error('Bad credentials');
-    }
-    const token = JSON.stringify({ email: account.email });//JUST Temporary!!! TODO: make it better
-    return token;
   },
   /**
    * People

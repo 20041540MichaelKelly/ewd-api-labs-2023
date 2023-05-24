@@ -6,6 +6,7 @@ export default (dependencies) => {
         // Input
         try {
             console.log('Validating entry fields for fantasy Movie...');
+            console.log(request.body);
             const validated = await fantasyMovieSchema['fantasyMovie'].validateAsync(request.body);
             request.body = validated;
             console.log('Validation complete');

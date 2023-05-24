@@ -49,14 +49,14 @@ export default class extends AccountRepository {
 
     async getByEmail(userEmail) {
         console.log("Getting by email...");
-
+        console.log(userEmail);
         const result = await this.model.findOne({email: userEmail.toLowerCase()});
-        console.log(result);
+        console.log("Checking result for email..");
         if(result === null){
             console.log("No account matches this email!");
-
             return result;
         }
+        console.log("Email has been found!");
         return new Account(result.id, result.firstName, result.lastName, result.email, result.password,result.favourites, result.favouritePeople, result.favouriteTvShows);
     }
 
