@@ -165,5 +165,32 @@ I researched into heroku to deploy the API and Vercel to deploy the front end re
 I enjoy writing DRY efficent code and had a good look into this in terms of the programming language Node JS.
 Docker is an application that I would have used in my previous job, I still needed to be refreshed on it's usage in this assignment.
 I found the testing aspect of the project to be very Intriguing. I have always been fascinated at the amount of third party applications that are available to developers for testing. I would find creating an a pplication like Postman to be very appealing. 
-
-I had researched express passport and session and from the examples session seemed to be the easiest to implement.
+The testing phase was the best learning phase. I had created 70% of the API calls through this process.
+  
+  [api_call]: ./images/api_calls.png
+[chatgpt]: ./images/chatgpt_regex.png
+[logging]: ./images/console_logging.png
+[error_email]: ./images/error_email_already_exists.png
+[playlist_favourite_icon_movie]: ./screenshots/playlist_favourite_icon_movie.png
+[error_email_exists_signup]: ./screenshots/error_email_exists_signup.png
+[success_signup]: ./screenshots/success_signup_alert.png
+[home_page_search]: ./screenshots/home_page_search.png
+[home_page]: ./screenshots/home_page1.png
+[home_page_movie_card]: ./screenshots/movie_cards_home_page.png
+[home_page_nav]: ./screenshots/home_page_nav.png
+[upcoming_movies]: ./screenshots/upcoming_movies1.png
+[hover_example]: ./screenshots/hover_example.png
+[review1]: ./screenshots/review1.png
+[review2]: ./screenshots/review2.png
+[create_a_fantasy_movie]: ./screenshots/create_a_fantasy_movie.png
+[fantasy_list]: ./screenshots/fantasy_list.png
+[fantasy_movie_details]: ./screenshots/fantasy_movie_details.png
+[movie_card1]: ./screenshots/movie_card1.png
+[actor_details]: ./screenshots/actors_details.png
+[similar_movies]: ./screenshots/similar_movies.png
+[actor_different_movie]: ./screenshots/actor_different_movie.png
+[tv_shows]: ./screenshots/tv_shows.png
+[tv_shows_fave_play]: ./screenshots/tv_shows_fave_play.png
+[tv_show_play_list]: ./screenshots/tv_show_playlist.png
+[tv_show_favourites]: ./screenshots/tv_show_favourotes.png
+[tv_similar]: ./screenshots/tv_similar.png
